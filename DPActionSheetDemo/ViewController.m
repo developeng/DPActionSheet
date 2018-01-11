@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "DPActionSheet.h"
 
-@interface ViewController ()
+@interface ViewController ()<DPActionSheetDelegate>
 
 @end
 
@@ -17,6 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+- (IBAction)buttonClick:(UIButton *)sender {
+    
+    DPActionSheet *sheet = [[DPActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去搭配", @"收藏",@"加关注", @"屏蔽", nil];
+    sheet.tag = 10;
+    [sheet show];
+    
+    
 }
 
 
