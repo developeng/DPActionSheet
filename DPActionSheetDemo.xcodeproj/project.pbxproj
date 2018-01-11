@@ -15,6 +15,7 @@
 		57BCAFA4200731E3009F8D48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BCAFA3200731E3009F8D48 /* main.m */; };
 		57BCAFAE200731E3009F8D48 /* DPActionSheetDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BCAFAD200731E3009F8D48 /* DPActionSheetDemoTests.m */; };
 		57BCAFB9200731E3009F8D48 /* DPActionSheetDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BCAFB8200731E3009F8D48 /* DPActionSheetDemoUITests.m */; };
+		57BCAFC92007323D009F8D48 /* DPActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BCAFC82007323D009F8D48 /* DPActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		57BCAFB4200731E3009F8D48 /* DPActionSheetDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DPActionSheetDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BCAFB8200731E3009F8D48 /* DPActionSheetDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPActionSheetDemoUITests.m; sourceTree = "<group>"; };
 		57BCAFBA200731E3009F8D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57BCAFC72007323D009F8D48 /* DPActionSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPActionSheet.h; sourceTree = "<group>"; };
+		57BCAFC82007323D009F8D48 /* DPActionSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPActionSheet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 		57BCAF93200731E3009F8D48 /* DPActionSheetDemo */ = {
 			isa = PBXGroup;
 			children = (
+				57BCAFC620073214009F8D48 /* DPActionSheet */,
 				57BCAF94200731E3009F8D48 /* AppDelegate.h */,
 				57BCAF95200731E3009F8D48 /* AppDelegate.m */,
 				57BCAF97200731E3009F8D48 /* ViewController.h */,
@@ -130,6 +134,15 @@
 				57BCAFBA200731E3009F8D48 /* Info.plist */,
 			);
 			path = DPActionSheetDemoUITests;
+			sourceTree = "<group>";
+		};
+		57BCAFC620073214009F8D48 /* DPActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				57BCAFC72007323D009F8D48 /* DPActionSheet.h */,
+				57BCAFC82007323D009F8D48 /* DPActionSheet.m */,
+			);
+			path = DPActionSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57BCAF99200731E3009F8D48 /* ViewController.m in Sources */,
+				57BCAFC92007323D009F8D48 /* DPActionSheet.m in Sources */,
 				57BCAFA4200731E3009F8D48 /* main.m in Sources */,
 				57BCAF96200731E3009F8D48 /* AppDelegate.m in Sources */,
 			);
