@@ -17,7 +17,7 @@
 
 @property(strong, nonatomic) UIView *backgroundView;
 @property(strong, nonatomic) UIView *contentView;
-@property(strong, nonatomic) UIView *buttonView;
+@property(strong, nonatomic) UIScrollView *buttonView;
 @property(strong, nonatomic) UILabel *titleLabel;
 @property(strong, nonatomic) NSMutableArray *buttonArray;
 @property(strong, nonatomic) UIButton *cancelButton;
@@ -28,6 +28,7 @@
 
 CGFloat contentViewWidth;
 CGFloat contentViewHeight;
+CGFloat buttonViewHeight;
 
 @implementation DPActionSheet
 
@@ -68,14 +69,37 @@ CGFloat contentViewHeight;
     return self;
 }
 
+- (id)initWithTitle:(NSString *)title delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonArr:(NSArray *)otherButtonArr{
+    if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
+        _title = title;
+        _delegate = delegate;
+        _cancelButtonTitle = cancelButtonTitle;
+        _buttonArray = [NSMutableArray array];
+        _buttonTitleArray = [NSMutableArray array];
+        [_buttonTitleArray addObjectsFromArray:otherButtonArr];
+        self.backgroundColor = [UIColor clearColor];
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hide)];
+        _backgroundView = [[UIView alloc] initWithFrame:self.frame];
+        _backgroundView.alpha = 0;
+        _backgroundView.backgroundColor = [UIColor blackColor];
+        [_backgroundView addGestureRecognizer:tapGestureRecognizer];
+        [self addSubview:_backgroundView];
+        
+        [self initContentView];
+    }
+    return self;
+}
+
 - (void)initContentView {
     contentViewWidth = self.frame.size.width;
     contentViewHeight = 0;
+    buttonViewHeight = 0;
     
     _contentView = [[UIView alloc] init];
     _contentView.backgroundColor = [UIColor clearColor];
     
-    _buttonView = [[UIView alloc] init];
+    _buttonView = [[UIScrollView alloc] init];
     _buttonView.backgroundColor = [UIColor whiteColor];
     
     [self initTitle];
@@ -96,6 +120,7 @@ CGFloat contentViewHeight;
         _titleLabel.backgroundColor = [UIColor whiteColor];
         [_buttonView addSubview:_titleLabel];
         contentViewHeight += _titleLabel.frame.size.height;
+        buttonViewHeight += _titleLabel.frame.size.height;
     }
 }
 
@@ -103,10 +128,10 @@ CGFloat contentViewHeight;
     if (_buttonTitleArray.count > 0) {
         NSInteger count = _buttonTitleArray.count;
         for (int i = 0; i < count; i++) {
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, contentViewHeight, contentViewWidth, 1)];
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, buttonViewHeight, contentViewWidth, 1)];
             lineView.backgroundColor = [UIColor colorWithRed:230 / 255.0 green:230 / 255.0 blue:230 / 255.0 alpha:1.0];
             [_buttonView addSubview:lineView];
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, contentViewHeight + 1, contentViewWidth, 52)];
+            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, buttonViewHeight + 1, contentViewWidth, 52)];
             button.backgroundColor = [UIColor whiteColor];
             button.titleLabel.font = [UIFont systemFontOfSize:18];
             [button setTitle:_buttonTitleArray[i] forState:UIControlStateNormal];
@@ -114,9 +139,15 @@ CGFloat contentViewHeight;
             [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [_buttonArray addObject:button];
             [_buttonView addSubview:button];
-            contentViewHeight += lineView.frame.size.height + button.frame.size.height;
+            buttonViewHeight += lineView.frame.size.height + button.frame.size.height;
         }
+        _buttonView.contentSize = CGSizeMake(contentViewWidth, buttonViewHeight);
+        if (buttonViewHeight > self.frame.size.height-100) {
+            buttonViewHeight = self.frame.size.height-100;
+        }
+        contentViewHeight = buttonViewHeight;
         _buttonView.frame = CGRectMake(0, 0, contentViewWidth, contentViewHeight);
+       
         [_contentView addSubview:_buttonView];
     }
 }
@@ -214,6 +245,7 @@ CGFloat contentViewHeight;
     if (self.delegate && [self.delegate respondsToSelector:@selector(actionSheet:clickedButtonIndex:)]) {
         for (int i = 0; i < _buttonArray.count; i++) {
             if (button == _buttonArray[i]) {
+                self.buttonName = button.titleLabel.text;
                 [_delegate actionSheet:self clickedButtonIndex:i];
                 break;
             }
