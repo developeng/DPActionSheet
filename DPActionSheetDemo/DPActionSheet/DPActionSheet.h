@@ -12,8 +12,11 @@
 @property(weak, nonatomic) id <DPActionSheetDelegate> delegate;
 @property(strong, nonatomic) NSString *title;
 @property(strong, nonatomic) NSString *cancelButtonTitle;
+@property(strong, nonatomic) NSString *buttonName;
 
 - (id)initWithTitle:(NSString *)title delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)initWithTitle:(NSString *)title delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonArr:(NSArray *)otherButtonArr;
+
 - (void)show;
 - (void)hide;
 - (void)setTitleColor:(UIColor *)color fontSize:(CGFloat)size;
