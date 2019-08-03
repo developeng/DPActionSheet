@@ -28,6 +28,10 @@
     
 }
 
+- (void)actionSheet:(DPActionSheet *)sheet clickedButtonIndex:(NSInteger)buttonIndex{
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
