@@ -26,7 +26,7 @@
     
     switch (sender.tag) {
         case 1:{
-            DPActionSheet *sheet = [[DPActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去搭配1", @"收藏2",@"加关注3", @"屏蔽4",@"去搭配5", @"收藏6",@"加关注7", nil];
+            DPActionSheet *sheet = [[DPActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去搭配1", @"收藏2",@"加关注3", @"屏蔽4",@"去搭配5", @"收藏6",@"加关注7",@"加关注8", nil];
             sheet.tag = 10;
             [sheet show];
             
